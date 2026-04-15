@@ -1,8 +1,8 @@
 # bizarre_tagger
 
-**Conda env:** `live2d_ann_detectron2`
+**Conda 环境：** `live2d_ann_detectron2`
 
-## Setup
+## 设置
 
 ```bash
 conda create -n live2d_ann_detectron2 python=3.10
@@ -11,6 +11,6 @@ pip install git+https://github.com/facebookresearch/detectron2@main#egg=detectro
   --no-build-isolation
 ```
 
-## Known Issues
+## 已知问题
 
-- See `../../ISSUES.md`.
+- 参见 `../../ISSUES.md`。

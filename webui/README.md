@@ -1,84 +1,85 @@
-# See-through WebUI — ワンクリックインストールガイド
+# See-through WebUI — 一键安装指南
 
-## 概要
+## 概述
 
-アニメイラスト1枚から最大23レイヤーのセマンティック分解を行う
-[See-through](https://github.com/shitagaki-lab/see-through) のローカルWebUI。
+这是 [See-through](https://github.com/shitagaki-lab/see-through) 的本地 WebUI，可从单张动漫插图生成最多 23 个图层的语义分解。
 
-**対象**: Windows 10/11 + NVIDIA GPU (VRAM 8GB以上推奨)
-
----
-
-## クイックスタート
-
-### 1. インストール
-`install.bat` をダブルクリックするだけ。以下が自動的に行われます：
-
-1. Python 3.12 の確認（なければ自動ダウンロード＆インストール）
-2. 仮想環境 (venv) の作成
-3. PyTorch 2.8 + CUDA 12.8 のインストール
-4. 依存パッケージのインストール
-5. NF4量子化モデル (~3GB) のダウンロード
-
-**所要時間**: 初回 15〜30分（回線速度による）
-
-### 2. 起動
-`run.bat` をダブルクリック → ブラウザが自動で開きます。
+**目标系统**: Windows 10/11 + NVIDIA GPU (推荐 VRAM 8GB 以上)
 
 ---
 
-## ファイル構成
+## 快速开始
+
+### 1. 安装
+
+只需双击 `install.bat`。将自动执行以下操作：
+
+1. 检查 Python 3.12（如果没有则自动下载并安装）
+2. 创建虚拟环境 (venv)
+3. 安装 PyTorch 2.8 + CUDA 12.8
+4. 安装依赖包
+5. 下载 NF4 量化模型 (~3GB)
+
+**所需时间**: 首次运行 15〜30 分钟（取决于网络速度）
+
+### 2. 启动
+
+双击 `run.bat` → 浏览器将自动打开。
+
+---
+
+## 文件结构
 
 ```
 see-through/
-├── install.bat          ← インストーラー（初回のみ）
-├── run.bat              ← 起動ランチャー（毎回）
+├── install.bat          ← 安装程序（仅首次使用）
+├── run.bat              ← 启动器（每次使用）
 ├── webui/
-│   ├── README.md        ← このファイル
-│   └── requirements.txt ← WebUI用依存パッケージ
+│   ├── README.md        ← 本文件
+│   └── requirements.txt ← WebUI 依赖包
 ├── tools/
-│   └── webui.py         ← WebUI本体
-├── venv/                ← 仮想環境（install.batで作成）
-└── .hf_cache/           ← モデルキャッシュ
+│   └── webui.py         ← WebUI 主体
+├── venv/                ← 虚拟环境（由 install.bat 创建）
+└── .hf_cache/           ← 模型缓存
 ```
 
 ---
 
-## 動作要件
+## 系统要求
 
-| 項目 | 最小 | 推奨 |
+| 项目 | 最低要求 | 推荐配置 |
 |------|------|------|
-| OS | Windows 10 (64-bit) | Windows 11 |
+| 操作系统 | Windows 10 (64 位) | Windows 11 |
 | GPU | NVIDIA (VRAM 6GB) | NVIDIA (VRAM 10GB+) |
-| メモリ | 8GB | 16GB |
-| ストレージ | 15GB空き | 20GB空き |
-| Python | 自動インストール | - |
+| 内存 | 8GB | 16GB |
+| 存储空间 | 15GB 可用 | 20GB 可用 |
+| Python | 自动安装 | - |
 
-### VRAM目安 (NF4モード)
+### VRAM 参考 (NF4 模式)
 
-| 解像度 | VRAM消費 |
+| 分辨率 | VRAM 消耗 |
 |--------|----------|
 | 512    | ~5GB     |
 | 768    | ~5.5GB   |
 | 1024   | ~7GB     |
 | 1280   | ~9GB     |
 
-VRAM 8GB環境では解像度768以下を推奨。
+VRAM 8GB 环境下建议使用 768 或更低的分辨率。
 
 ---
 
-## トラブルシューティング
+## 故障排除
 
-### 「Python が見つかりません」
-→ install.bat が自動で Python 3.12 をインストールします。
-  手動インストールの場合: https://www.python.org/downloads/
+### "找不到 Python"
+→ install.bat 将自动安装 Python 3.12。
+  如需手动安装：https://www.python.org/downloads/
 
-### 「CUDA error」
-→ NVIDIA ドライバを最新版に更新してください。
+### "CUDA error"
+→ 请将 NVIDIA 驱动程序更新至最新版本。
   https://www.nvidia.com/drivers
 
-### 「モデルのダウンロードが途中で止まる」
-→ install.bat をもう一度実行すれば途中から再開します。
+### "模型下载中途停止"
+→ 再次运行 install.bat 即可从中断处继续。
 
-### 「VRAM不足 / Out of Memory」
-→ WebUIの解像度スライダーを下げてください（512〜768推奨）。
+### "VRAM 不足 / Out of Memory"
+→ 请降低 WebUI 的分辨率滑块（建议 512〜768）。

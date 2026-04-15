@@ -1,8 +1,8 @@
 # lama_inpainter
 
-**Conda env:** `live2d_ann_lama` (TBD — see `../../ISSUES.md`)
+**Conda 环境：** `live2d_ann_lama`（待定 — 参见 `../../ISSUES.md`）
 
-## Known Issues
+## 已知问题
 
-- No conda env documented. Unclear if `live2d_inference` env is compatible.
-- Setup instructions pending investigation.
+- 没有记录 conda 环境。不清楚 `live2d_inference` 环境是否兼容。
+- 设置说明待调查。

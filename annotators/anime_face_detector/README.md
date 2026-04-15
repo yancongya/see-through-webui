@@ -1,8 +1,8 @@
 # anime_face_detector
 
-**Conda env:** `live2d_ann_mmpose`
+**Conda 环境：** `live2d_ann_mmpose`
 
-## Setup
+## 设置
 
 ```bash
 conda create -n live2d_ann_mmpose python=3.10 -c conda-forge
@@ -15,6 +15,6 @@ mim install mmdet==2.28.2
 mim install mmpose==0.29.0
 ```
 
-## Known Issues
+## 已知问题
 
-- Env compatibility with `common/` not verified. See `../../ISSUES.md`.
+- 与 `common/` 的环境兼容性未验证。参见 `../../ISSUES.md`。

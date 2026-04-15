@@ -1,15 +1,15 @@
 # lang_sam
 
-**Conda env:** `live2d_ann_langsam` (TBD — see `../../ISSUES.md`)
+**Conda 环境：** `live2d_ann_langsam`（待定 — 参见 `../../ISSUES.md`）
 
-## Setup (partial)
+## 设置（部分）
 
 ```bash
-# lang_sam ships its own requirements.txt:
+# lang_sam 带有自己的 requirements.txt：
 pip install -r requirements.txt
-# Note: takes several minutes (builds SAM2)
+# 注意：需要几分钟（构建 SAM2）
 ```
 
-## Known Issues
+## 已知问题
 
-- No conda env name established. See `../../ISSUES.md`.
+- 尚未确定 conda 环境名称。参见 `../../ISSUES.md`。

@@ -1,8 +1,8 @@
 # animeinsseg
 
-**Conda env:** `live2d_ann_mmdet3`
+**Conda 环境：** `live2d_ann_mmdet3`
 
-## Setup
+## 设置
 
 ```bash
 conda create -n live2d_ann_mmdet3 python=3.12 -c conda-forge
@@ -16,6 +16,6 @@ pip install setuptools==80.9.0
 pip install git+https://github.com/dmMaze/mmdetection@dev-3.x#egg=mmdet
 ```
 
-## Known Issues
+## 已知问题
 
-- Dependency hell — cannot be expressed as a single conda YAML. See `../../ISSUES.md`.
+- 依赖地狱 — 无法表示为单个 conda YAML 文件。参见 `../../ISSUES.md`。

@@ -2,16 +2,16 @@
 
 # See-through WebUI
 
-**アニメイラスト1枚 → 最大23レイヤーに自動分解**
+**一张动漫插图 → 自动分解为最多 23 个图层**
 
-[![Original Project](https://img.shields.io/badge/Original-shitagaki--lab%2Fsee--through-blue)](https://github.com/shitagaki-lab/see-through)
+[![原始项目](https://img.shields.io/badge/Original-shitagaki--lab%2Fsee--through-blue)](https://github.com/shitagaki-lab/see-through)
 [![arXiv](https://img.shields.io/badge/arXiv-2602.03749-b31b1b.svg)](https://arxiv.org/abs/2602.03749)
-[![License](https://img.shields.io/badge/License-Apache%202.0-green.svg)](LICENSE)
+[![许可证](https://img.shields.io/badge/License-Apache%202.0-green.svg)](LICENSE)
 
 <img src="common/assets/representative.jpg" width="600">
 
-*[See-through](https://github.com/shitagaki-lab/see-through) のローカル実行用 WebUI です。*
-*Windows + NVIDIA GPU 専用。Python やコマンドラインの知識は不要 — ダブルクリックだけで使えます。*
+*这是 [See-through](https://github.com/shitagaki-lab/see-through) 的本地运行用 WebUI。*
+*仅限 Windows + NVIDIA GPU。无需 Python 或命令行知识——只需双击即可使用。*
 
 <img src="docs/img.png" width="800">
 
@@ -19,144 +19,144 @@
 
 ---
 
-## 🚀 使い方（たったの3ステップ）
+## 🚀 使用方法（仅需 3 步）
 
-### ステップ 0：ダウンロード
+### 步骤 0：下载
 
-👉 **[最新版をダウンロード（ZIP）](https://github.com/BeamManP/see-through-webui/releases/latest)**
+👉 **[下载最新版本（ZIP）](https://github.com/BeamManP/see-through-webui/releases/latest)**
 
-Releases ページから `see-through-webui.zip` をダウンロードし、好きな場所に展開してください。
+从 Releases 页面下载 `see-through-webui.zip`，并解压到任意位置。
 
-### ステップ 1：インストール
+### 步骤 1：安装
 
-展開したフォルダ内の **`install.bat`** をダブルクリックしてください。
+双击展开文件夹中的 **`install.bat`**。
 
-あとは待つだけ。以下が全部自動で行われます：
-- ✅ Python がなければ自動でインストール
-- ✅ AI モデル（約3GB）を自動でダウンロード
-- ✅ 必要なソフトを全部セットアップ
+接下来只需等待。以下操作将全部自动完成：
+- ✅ 如果没有 Python，将自动安装
+- ✅ 自动下载 AI 模型（约 3GB）
+- ✅ 安装所有必需的软件
 
-> 💡 初回は **15〜30分** かかります（ネット回線によります）。
-> 初回ダウンロード総量は約 **6GB**（Python + PyTorch + AI モデル）です。
-> 途中で止まっても、もう一度 `install.bat` を実行すれば続きからやり直せます。
+> 💡 首次运行需要 **15〜30 分钟**（取决于网络速度）。
+> 首次下载总量约为 **6GB**（Python + PyTorch + AI 模型）。
+> 如果中途停止，再次运行 `install.bat` 即可从中断处继续。
 
-### ステップ 2：起動
+### 步骤 2：启动
 
-**`run.bat`** をダブルクリックしてください。
+双击 **`run.bat`**。
 
-ブラウザが自動で開きます。画像をドラッグ＆ドロップして「生成」を押すだけ！
+浏览器将自动打开。只需拖放图像并按"生成"按钮即可！
 
 ---
 
-## 💻 必要なもの
+## 💻 系统要求
 
-| 必要なもの | 条件 |
+| 要求 | 条件 |
 |-----------|------|
-| **OS** | Windows 10 / 11（64ビット） |
-| **GPU** | NVIDIA RTX 2060 以上（Turing世代以降） |
-| **VRAM** | 8GB 以上 |
-| **メモリ** | 8GB 以上 |
-| **空き容量** | 20GB 以上 |
-| **Python** | なくてOK（自動インストールされます） |
-| **Git** | なくてOK（Releasesからzipをダウンロードしてください） |
+| **操作系统** | Windows 10 / 11（64 位） |
+| **GPU** | NVIDIA RTX 2060 或更高（Turing 架构及以后） |
+| **VRAM** | 8GB 或更高 |
+| **内存** | 8GB 或更高 |
+| **可用空间** | 20GB 或更高 |
+| **Python** | 不需要（将自动安装） |
+| **Git** | 不需要（请从 Releases 下载 zip 文件） |
 
-> ⚠️ **GTX 10xx / 16xx シリーズでは動作しません。**
-> NF4 量子化に必要な機能が Turing 世代（RTX 20xx）以降の GPU にしかないためです。
+> ⚠️ **GTX 10xx / 16xx 系列无法运行。**
+> 因为 NF4 量化需要 Turing 架构（RTX 20xx）及以后的 GPU 才支持的功能。
 
-### VRAM と解像度の目安
+### VRAM 与分辨率参考
 
-解像度を上げると高品質になりますが、VRAMを多く使います。
-WebUI のスライダーで調整できます。
+提高分辨率可获得更高质量的输出，但会消耗更多 VRAM。
+可在 WebUI 中通过滑块进行调整。
 
-| 解像度 | VRAM 使用量 | おすすめ環境 |
+| 分辨率 | VRAM 使用量 | 推荐环境 |
 |--------|-----------|------------|
-| 512    | 約 5GB    | RTX 2060 / RTX 3060 |
-| 768    | 約 5.5GB  | RTX 3060 / RTX 4060 |
-| 1024   | 約 7GB    | RTX 3060 Ti / RTX 4060 Ti |
-| 1280   | 約 9GB    | RTX 3080 / RTX 4070 以上 |
+| 512    | 约 5GB    | RTX 2060 / RTX 3060 |
+| 768    | 约 5.5GB  | RTX 3060 / RTX 4060 |
+| 1024   | 约 7GB    | RTX 3060 Ti / RTX 4060 Ti |
+| 1280   | 约 9GB    | RTX 3080 / RTX 4070 或更高 |
 
 ---
 
-## ❓ 困ったときは
+## ❓ 遇到问题时
 
 <details>
-<summary><b>ダウンロードや実行時に Windows の警告が出た</b></summary>
+<summary><b>下载或运行时出现 Windows 警告</b></summary>
 
-ブラウザから ZIP をダウンロードすると、Windows Defender SmartScreen が警告を出すことがあります。
-これは未署名の配布物に対する一般的な警告で、ウイルスではありません。
+从浏览器下载 ZIP 文件时，Windows Defender SmartScreen 可能会发出警告。
+这是对未签名分发文件的常见警告，并非病毒。
 
-- Chrome: 「保存」→「詳細」→「保持する」
-- Edge: 「...」→「保持する」
-- 実行時: 「詳細情報」→「実行」
+- Chrome: "保存" → "详细信息" → "保留"
+- Edge: "..." → "保留"
+- 运行时："详细信息" → "仍要运行"
 </details>
 
 <details>
-<summary><b>install.bat でエラーが出た</b></summary>
+<summary><b>install.bat 出现错误</b></summary>
 
-- もう一度 `install.bat` をダブルクリックしてみてください（途中から再開できます）
-- うまくいかない場合は、`venv` フォルダを丸ごと削除してからやり直してください
-- エラーの詳細は `install.log` に記録されています
+- 请尝试再次双击 `install.bat`（可从中断处继续）
+- 如果仍然不行，请删除整个 `venv` 文件夹后重试
+- 错误详情记录在 `install.log` 中
 </details>
 
 <details>
-<summary><b>「NVIDIA GPU not detected」と表示される</b></summary>
+<summary><b>显示 "NVIDIA GPU not detected"</b></summary>
 
-このツールは **NVIDIA GPU 専用** です（AMD / Intel GPU では動きません）。
-NVIDIA GPU があるのにエラーが出る場合は、ドライバを最新版に更新してください。
+本工具**仅限 NVIDIA GPU**（不支持 AMD / Intel GPU）。
+如果有 NVIDIA GPU 但仍报错，请将驱动程序更新至最新版本。
 → https://www.nvidia.com/drivers
 </details>
 
 <details>
-<summary><b>生成中に「Out of Memory」と出る</b></summary>
+<summary><b>生成过程中出现 "Out of Memory"</b></summary>
 
-VRAM が足りません。WebUI の解像度スライダーを **512 〜 768** に下げてみてください。
+VRAM 不足。请尝试将 WebUI 的分辨率滑块调低至 **512 〜 768**。
 </details>
 
 <details>
-<summary><b>「Error named symbol not found」と表示される</b></summary>
+<summary><b>显示 "Error named symbol not found"</b></summary>
 
-GTX 10xx / 16xx シリーズの GPU では動作しません。
-NF4 量子化（VRAM節約のための技術）が RTX 20xx 以降の GPU を必要とするためです。
+GTX 10xx / 16xx 系列 GPU 无法运行。
+因为 NF4 量化（节省 VRAM 的技术）需要 RTX 20xx 及以后的 GPU。
 </details>
 
 <details>
-<summary><b>ブラウザが自動で開かない</b></summary>
+<summary><b>浏览器未自动打开</b></summary>
 
-`run.bat` の画面に表示される URL（`http://127.0.0.1:7860` など）を
-ブラウザのアドレスバーにコピペしてください。
+将 `run.bat` 窗口中显示的 URL（如 `http://127.0.0.1:7860`）
+复制粘贴到浏览器的地址栏中即可。
 </details>
 
 ---
 
-## 📁 ファイル構成
+## 📁 文件结构
 
 ```
 see-through-webui/
-├── 📄 install.bat          … インストーラー（初回のみ）
-├── 📄 run.bat              … 起動ランチャー（毎回これを使う）
+├── 📄 install.bat          … 安装程序（仅首次使用）
+├── 📄 run.bat              … 启动器（每次使用）
 ├── 📁 tools/
-│   └── webui.py            … WebUI 本体
+│   └── webui.py            … WebUI 主体
 ├── 📁 webui/
-│   └── requirements.txt    … 依存パッケージ一覧
-├── 📁 inference/           … See-through 推論エンジン（本家由来）
-├── 📁 common/              … 共通ユーティリティ（本家由来）
-├── 📁 venv/                … Python 仮想環境（install.bat で作成）
-└── 📁 .hf_cache/           … AI モデルのキャッシュ
+│   └── requirements.txt    … 依赖包列表
+├── 📁 inference/           … See-through 推理引擎（源自原版）
+├── 📁 common/              … 通用工具（源自原版）
+├── 📁 venv/                … Python 虚拟环境（由 install.bat 创建）
+└── 📁 .hf_cache/           … AI 模型缓存
 ```
 
 ---
 
-## 🙏 クレジット
+## 🙏 致谢
 
-このプロジェクトは **[See-through](https://github.com/shitagaki-lab/see-through)** のフォークです。
+本项目是 **[See-through](https://github.com/shitagaki-lab/see-through)** 的分支。
 
-**原著論文:**
+**原论文:**
 > Jian Lin, Chengze Li, Haoyun Qin, Kwun Wang Chan, Yanghua Jin, Hanyuan Liu, Stephen Chun Wang Choy, Xueting Liu.
 > "See-through: Single-image Layer Decomposition for Anime Characters"
 > *ACM SIGGRAPH 2026 Conference Proceedings* — [arXiv:2602.03749](https://arxiv.org/abs/2602.03749)
 
-元プロジェクトの作者の皆さまに心から感謝します。
+衷心感谢原项目的作者们。
 
-## 📄 ライセンス
+## 📄 许可证
 
-[Apache License 2.0](LICENSE) — 原著プロジェクトと同一のライセンスです。
+[Apache License 2.0](LICENSE) — 与原项目相同的许可证。

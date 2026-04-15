@@ -1,48 +1,33 @@
-# ── Credentials & secrets ─────────────────────────────────────────
-hf_credential
-*.token
-.env
-.env.*
-!*.example
+```
+# Qt translation files
+*.ts
 
-# ── Workspace (datasets, model weights) ──────────────────────────
-workspace/
-
-# ── Python ────────────────────────────────────────────────────────
-__pycache__/
-*.py[cod]
-*$py.class
-*.egg-info/
-*.egg
+# Build artifacts
 build/
 dist/
+*.pyc
+__pycache__/
 
-# ── IDE & editors ─────────────────────────────────────────────────
+# Dependencies
+node_modules/
+venv/
+.venv/
+.env
+.env.local
+
+# Editors
 .vscode/
 .idea/
-*.code-workspace
 
-# ── OS artifacts ──────────────────────────────────────────────────
-.DS_Store
-Thumbs.db
-*~
-
-# ── Misc artifacts ────────────────────────────────────────────────
-tmp/
+# Logs
 *.log
-wandb/
-local_*
 
-# ── Symlink (user creates locally: ln -sf common/assets assets) ──
-/assets
+# Coverage
+coverage/
+htmlcov/
+.coverage
 
-# ── WebUI installer artifacts ─────────────────────────────────────
-venv/
-.pip_cache/
-.hf_cache/
-*.zip
-
-# ── Non-WebUI local files ─────────────────────────────────────────
-seethrough_colab_codex.ipynb
-requirements-colab-t4-nf4.txt
-seethrough_webui.bat
+# Python cache
+.mypy_cache/
+.pytest_cache/
+```
