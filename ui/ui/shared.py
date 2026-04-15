@@ -60,23 +60,23 @@ FOREGROUND_FONTCOLOR = (93,93,95)
 
 MAX_NUM_LOG = 7
 
-TRANSLATE_DIR = osp.join(PROGRAM_PATH, 'translate')
+TRANSLATE_DIR = osp.join(PROGRAM_PATH, 'translations')
 DISPLAY_LANGUAGE_MAP = {
     "English": "English",
-    # "简体中文": "zh_CN",
+    "简体中文": "zh_CN",
     # "Русский": "ru_RU",
     # "Português (Brasil)": "pt_BR",
     # "한국어": "ko_KR"
 }
 VALID_LANG_SET = set(list(DISPLAY_LANGUAGE_MAP.values()))
 
-# for p in os.listdir(TRANSLATE_DIR):
-#     if p.endswith('.qm'):
-#         lang = p.replace('.qm', '')
-#         if lang not in VALID_LANG_SET:
-#             DISPLAY_LANGUAGE_MAP[lang] = lang
+for p in os.listdir(TRANSLATE_DIR):
+    if p.endswith('.qm'):
+        lang = p.replace('.qm', '')
+        if lang not in VALID_LANG_SET:
+            DISPLAY_LANGUAGE_MAP[lang] = lang
 
-DEFAULT_DISPLAY_LANG = 'English'
+DEFAULT_DISPLAY_LANG = '简体中文'
 
 USE_PYSIDE6 = False
 ON_MACOS = sys.platform == 'darwin'
