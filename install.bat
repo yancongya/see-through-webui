@@ -1,6 +1,6 @@
 @echo off
 
-:: If running inside PowerShell, re-launch in cmd.exe
+:: 如果在 PowerShell 中运行，则在 cmd.exe 中重新启动
 if defined PSModulePath if not defined __INSTALL_CMD (
     set "__INSTALL_CMD=1"
     cmd /c "%~f0" %*
@@ -12,41 +12,41 @@ chcp 65001 >nul
 setlocal EnableDelayedExpansion
 
 echo ============================================================
-echo   See-through WebUI Installer
+echo   See-through WebUI 安装程序
 echo ============================================================
 echo.
 
 cd /d "%~dp0"
 
-:: --- Init log ---
-echo See-through WebUI Install Log > install.log
-echo Date: %date% %time% >> install.log
+:: --- 初始化日志 ---
+echo See-through WebUI 安装日志 > install.log
+echo 日期：%date% %time% >> install.log
 echo. >> install.log
 
 :: ============================================================
-:: Pre-flight checks
+:: 预检查
 :: ============================================================
 
 :: --- NVIDIA GPU ---
-echo [0] Checking NVIDIA GPU ...
+echo [0] 检查 NVIDIA GPU ...
 nvidia-smi >nul 2>&1
 if not %errorlevel%==0 goto :err_no_gpu
-echo   OK
+echo   通过
 echo.
 
-:: --- Disk space ---
-echo [0] Checking disk space ...
+:: --- 磁盘空间 ---
+echo [0] 检查磁盘空间 ...
 for /f "tokens=3" %%f in ('dir /-C "%~dp0." 2^>nul ^| findstr /C:"bytes free"') do set "FREE_BYTES=%%f"
 if defined FREE_BYTES (
     for /f %%n in ('powershell -Command "[math]::Floor(%FREE_BYTES% / 1GB)"') do set "FREE_GB=%%n"
     if !FREE_GB! LSS 15 goto :err_disk_space
-    echo   Free: !FREE_GB! GB
+    echo   可用：!FREE_GB! GB
 )
-echo   OK
+echo   通过
 echo.
 
 :: ============================================================
-:: Find or install Python
+:: 查找或安装 Python
 :: ============================================================
 echo [1] Python ...
 
@@ -59,19 +59,19 @@ if not %errorlevel%==0 goto :check_path_python
 py -3.12 --version >nul 2>&1
 if %errorlevel%==0 (
     set "PYTHON_CMD=py -3.12"
-    echo   OK: Python 3.12
+    echo   通过：Python 3.12
     goto :python_ok
 )
 py -3.11 --version >nul 2>&1
 if %errorlevel%==0 (
     set "PYTHON_CMD=py -3.11"
-    echo   OK: Python 3.11
+    echo   通过：Python 3.11
     goto :python_ok
 )
 py -3.10 --version >nul 2>&1
 if %errorlevel%==0 (
     set "PYTHON_CMD=py -3.10"
-    echo   OK: Python 3.10
+    echo   通过：Python 3.10
     goto :python_ok
 )
 
@@ -90,25 +90,25 @@ for /f "tokens=1,2 delims=." %%a in ("!PY_VER_STR!") do (
 
 :install_python
 echo.
-echo   Python 3.10+ not found. Installing Python 3.12 ...
+echo   未找到 Python 3.10+。正在安装 Python 3.12 ...
 echo.
 set "PY_INSTALLER=python-3.12.9-amd64.exe"
 set "PY_URL=https://www.python.org/ftp/python/3.12.9/%PY_INSTALLER%"
 
-echo   Downloading ...
+echo   下载中 ...
 powershell -Command "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; Invoke-WebRequest -Uri '%PY_URL%' -OutFile '%PY_INSTALLER%' -UseBasicParsing"
 if not exist "%PY_INSTALLER%" goto :err_python_dl
 
-echo   Installing ...
+echo   安装中 ...
 "%PY_INSTALLER%" /passive InstallAllUsers=0 PrependPath=1 Include_launcher=1 Include_pip=1
 if %errorlevel% neq 0 goto :err_python_install
 del "%PY_INSTALLER%" 2>nul
 set "PATH=%LOCALAPPDATA%\Programs\Python\Python312;%LOCALAPPDATA%\Programs\Python\Python312\Scripts;%LOCALAPPDATA%\Programs\Python\Launcher;%PATH%"
 
-:: Find where Python was actually installed
+:: 查找 Python 的实际安装位置
 set "PYTHON_CMD=%LOCALAPPDATA%\Programs\Python\Python312\python.exe"
 if not exist "!PYTHON_CMD!" (
-    echo   Standard path not found, searching...
+    echo   标准路径未找到，正在搜索...
     for /f "delims=" %%p in ('where python 2^>nul') do (
         set "PYTHON_CMD=%%p"
         goto :python_found
@@ -120,28 +120,28 @@ if not exist "!PYTHON_CMD!" (
     goto :err_python_install
 )
 :python_found
-echo   OK: Python 3.12 installed.
+echo   通过：Python 3.12 已安装。
 
 :python_ok
-echo   Using: !PYTHON_CMD!
+echo   使用：!PYTHON_CMD!
 echo   PYTHON_CMD=!PYTHON_CMD! >> install.log
 echo.
 
 :: ============================================================
-:: Create venv
+:: 创建虚拟环境
 :: ============================================================
-echo [2] Creating venv ...
+echo [2] 创建虚拟环境 ...
 if exist "venv\Scripts\python.exe" (
-    echo   OK: venv exists.
+    echo   通过：虚拟环境已存在。
     goto :venv_ok
 )
 
-:: Try standard venv first
+:: 首先尝试标准 venv
 !PYTHON_CMD! -m venv venv 2>nul
 if exist "venv\Scripts\python.exe" goto :venv_created
 
-:: venv module might be missing - try virtualenv as fallback
-echo   venv module not found, installing virtualenv ...
+:: venv 模块可能缺失 - 尝试使用 virtualenv 作为后备
+echo   venv 模块未找到，正在安装 virtualenv ...
 !PYTHON_CMD! -m pip install virtualenv --quiet 2>nul
 if %errorlevel% neq 0 (
     !PYTHON_CMD! -m ensurepip --default-pip 2>nul
@@ -151,72 +151,72 @@ if %errorlevel% neq 0 (
 if not exist "venv\Scripts\python.exe" goto :err_venv
 
 :venv_created
-echo   OK: venv created.
+echo   通过：虚拟环境已创建。
 :venv_ok
 echo.
 
 :: ============================================================
-:: Hand off to Python setup script
+:: 转交至 Python 设置脚本
 :: ============================================================
-echo [3] Running setup ...
+echo [3] 运行设置 ...
 echo.
 call venv\Scripts\python.exe webui\setup.py
 if %errorlevel% neq 0 goto :err_setup
 echo.
-echo   Log saved to: install.log
+echo   日志保存至：install.log
 pause
 exit /b 0
 
 :: ============================================================
-:: Error handlers
+:: 错误处理程序
 :: ============================================================
 
 :err_no_gpu
 echo.
-echo   [ERROR] NVIDIA GPU not detected.
-echo   This tool requires an NVIDIA GPU with CUDA support.
+echo   [错误] 未检测到 NVIDIA GPU。
+echo   此工具需要支持 CUDA 的 NVIDIA GPU。
 echo   https://www.nvidia.com/drivers
 echo.
-echo   Log: install.log
+echo   日志：install.log
 pause
 exit /b 1
 
 :err_disk_space
 echo.
-echo   [ERROR] Not enough disk space (need 15+ GB).
-echo   Free: !FREE_GB! GB
+echo   [错误] 磁盘空间不足（需要 15GB 以上）。
+echo   可用：!FREE_GB! GB
 echo.
-echo   Log: install.log
+echo   日志：install.log
 pause
 exit /b 1
 
 :err_python_dl
 echo.
-echo   [ERROR] Python download failed.
-echo   Install manually: https://www.python.org/downloads/
-echo   Log: install.log
+echo   [错误] Python 下载失败。
+echo   手动安装：https://www.python.org/downloads/
+echo   日志：install.log
 pause
 exit /b 1
 
 :err_python_install
-echo   [ERROR] Python install failed.
+echo   [错误] Python 安装失败。
 del "%PY_INSTALLER%" 2>nul
-echo   Log: install.log
+echo   日志：install.log
 pause
 exit /b 1
 
 :err_venv
 echo.
-echo   [ERROR] Failed to create venv.
-echo   If conda is active, open a new Command Prompt and try again.
-echo   Log: install.log
+echo   [错误] 创建虚拟环境失败。
+echo   如果 conda 处于活动状态，请打开新的命令提示符并重试。
+echo   日志：install.log
 pause
 exit /b 1
 
 :err_setup
 echo.
-echo   [ERROR] Setup failed. Check install.log for details.
-echo   You can retry by running install.bat again.
-echo   Log: install.log
+echo   [错误] 设置失败。详细信息请查看 install.log。
+echo   您可以通过再次运行 install.bat 来重试。
+echo   日志：install.log
 pause
 exit /b 1
